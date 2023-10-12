@@ -47,7 +47,7 @@ function Card(props) {
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     },mode:"cors"
-}).
+}).then(response=>response.json).then(data=>console.log(data))
   }
   return (
     <div>
