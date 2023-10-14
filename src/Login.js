@@ -13,11 +13,23 @@ function Login(){
   var email 
   const [login,setLogin]= useState(null)
   useEffect(()=>{
-    fetch('https://script.google.com/macros/s/AKfycbw7zJ3c7xXUdj7mbDaXYl2MudX9vFNuE3kxGT1EZ2OQJhEWQ0iV_-_MT1713bkuYD0h/exec',{redirect: "follow", headers: {
+      var bool =  localStorage.getItem('is_login')
+    if(bool==='true'){
+      var id = localStorage.getItem('id')
+      var kkr_name = localStorage.getItem('name')
+      var kkr_post = localStorage.getItem('post')
+      var kkr_sabha = localStorage.getItem('sabha')
+      var sabha_no = localStorage.getItem('sabha_no')
+      navigate(`/home/${id}/${kkr_name}/${kkr_post}/${kkr_sabha}/${sabha_no}/balakodb`)
+    }
+    else{
+      fetch('https://script.google.com/macros/s/AKfycbw7zJ3c7xXUdj7mbDaXYl2MudX9vFNuE3kxGT1EZ2OQJhEWQ0iV_-_MT1713bkuYD0h/exec',{redirect: "follow", headers: {
       "Content-Type": "text/plain;charset=utf-8",
     },mode: "cors",})
     .then((response) => response.json())
     .then((data) => setLogin(data));
+    }
+    
   },[])
   var breakError = {}
   var login_flag = 0
@@ -28,7 +40,13 @@ function Login(){
       login.data.forEach((ele,i)=>{
         if(email===ele.kkr_mail){
           // props.GetData(i)
-          console.log(ele)
+          localStorage.setItem('is_login',true)
+          localStorage.setItem('id',i)
+          localStorage.setItem('name',ele.kkr_name)
+          localStorage.setItem('post',ele.kkr_post)
+          localStorage.setItem('sabha',ele.kkr_sabha)
+          localStorage.setItem('sabha_no',ele.sabha_no)
+
           navigate(`/home/${i}/${ele.kkr_name}/${ele.kkr_post}/${ele.kkr_sabha}/${ele.sabha_no}/balakodb`)
           login_flag = 1
           throw breakError

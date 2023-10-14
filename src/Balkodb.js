@@ -3,8 +3,9 @@ import Card from './Card'
 import { useParams } from 'react-router-dom'
 import Load from './Load'
 function Balkodb() {
-
   var {sabha}=useParams()
+  var x = 0
+  var [refresh ,setRefresh] = useState(x)
   sabha = sabha.replace(" ","")
   const [db,setDb]= useState(null)
   useEffect(()=>{
@@ -13,17 +14,20 @@ function Balkodb() {
     },mode: "cors",})
     .then((response) => response.json())
     .then((data) => setDb(data.data));
-  },[db])
+  },[refresh])
+  const refre = ()=>{
+    setRefresh(x+1)
+  }
   return (
     <div>
       {
-        db==null?<div className='text-white w-full h-full flex items-center justify-center'>
+        db==null?<div className='text-white w-full h-[100%-50px] flex items-center justify-center'>
           <h1><Load caption={"Fetching data..."}/></h1>
         </div>:
           <div className='w-full h-full'>
             {
               db.map((ele,i)=>{
-                return <div className="mt-0"><Card data={ele} index={i}/></div>
+                return <div className="mt-0"><Card data={ele} index={i} Refresh={refre}/></div>
               })
             }
           </div>

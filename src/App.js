@@ -4,9 +4,9 @@ import Home from './Home';
 import { BrowserRouter as Router ,Route,Routes } from 'react-router-dom';
 import Balkodb from './Balkodb';
 import Addbalko from './Addbalko';
-import Report from './Report'
+import Sabha from './Sabha'
 import NotFound from './NotFound'
-
+import Protected from './Protected';
 function App() { 
   // const [login,setLogin]= useState(null)
   // useEffect(()=>{
@@ -25,12 +25,12 @@ function App() {
     <Router>
       <Routes>
       <Route exact path='/' element={<Login/>}/>
-      <Route exact path='/home/:id/:name/:post/:sabha/:sabha_no' element={<Home/>}>
-        <Route exact path='balakodb' element={<Balkodb/>}/>
-        <Route exact path='add_new' element={<Addbalko/>}/>
-        <Route exact path='report' element={<Report/>}/>
+      <Route exact path='/home/:id/:name/:post/:sabha/:sabha_no' element={<Protected Component={Home}/>}>
+        <Route exact path='balakodb' element={<Protected Component={Balkodb}/>}/>
+        <Route exact path='add_new' element={<Protected Component={Addbalko}/>}/>
+        <Route exact path='sabha' element={< Protected Component={Sabha}/>}/>
       </Route>
-      <Route path='/*' element={<NotFound/>}/>
+      <Route path='/*' element={<Protected Component={NotFound}/>}/>
       </Routes>
     </Router>
 

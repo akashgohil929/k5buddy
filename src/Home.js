@@ -15,7 +15,7 @@ function Home(){
       <div className='navbar w-full h-[10%] bg-gray-100'>
         <Navbar headers_data={header_data}/>
       </div>
-      <div className='main-out w-full overflow-scroll h-[calc(100vh-22%)]'>
+      <div className='main-out w-full overflow-scroll overflow-x-hidden h-[calc(100vh-22%)]'>
         <Outlet/>
       </div>
     </div>

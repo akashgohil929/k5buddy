@@ -34,7 +34,7 @@ function NotFound() {
 
                     <div className="grow flex flex-col pl-5 pt-2">
                         <div className="font-bold text-sm md:text-lg lg:text-xl">
-                        <a target="_blank" rel="nofollow" href="mailto:borivalibalmandalk5@gmail.com">Contact</a>
+                        <a  href="mailto:borivalibalmandalk5@gmail.com">Contact</a>
                     </div>
                         </div>
 
