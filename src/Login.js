@@ -60,6 +60,7 @@ function Login(){
       if(err!==breakError) throw err
     }
     if(login_flag!==1){
+      localStorage.setItem('is_login',false)
       toast.error('Invalid Email id!', {
         position: "top-center",
         autoClose: 2500,

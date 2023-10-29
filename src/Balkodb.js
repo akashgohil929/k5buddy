@@ -9,7 +9,7 @@ function Balkodb() {
   sabha = sabha.replace(" ","")
   const [db,setDb]= useState(null)
   useEffect(()=>{
-    fetch(`https://script.google.com/macros/s/AKfycbwSzaapF1OU-_mEiR8DA02LhZTbwcSCPt1jCXPwoaAsIe4SFXpzwmB9-zxqr6S8Kx1d/exec?type=nodel&sabha=${sabha}`,{redirect: "follow", headers: {
+    fetch(`https://script.google.com/macros/s/AKfycbz7XOlBHFQ_h85UuZMGaaAnXxBtbKMHhju1YP_ZlksR1R_FBzRCq4XHfEPSIQkYM0Su/exec?type=nodel&sabha=${sabha}&action=full`,{redirect: "follow", headers: {
       "Content-Type": "text/plain;charset=utf-8",
     },mode: "cors",})
     .then((response) => response.json())
