@@ -3,8 +3,29 @@ import {useParams} from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import Swal from 'sweetalert2';
 import { Modal } from 'react-responsive-modal';
-
+import { ToastContainer, toast } from 'react-toastify';
+import ClipboardJS from 'clipboard';
 function Report() {
+    const [copy,setCopy]=useState(false)
+    const [copyvalue,setCopyvalue] = useState("")
+    useEffect(()=>{
+        var clipboard = new ClipboardJS(".copy-btn")
+        clipboard.on('success', function(e) {
+            setCopyvalue((e.text).replace(/\n\s*\n/g, '\n'));  
+            toast.success('Successfully Copied to Clipboard! Post report in group', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                })
+            e.clearSelection();
+        });
+    },[copy])
+
     const [open, setOpen] = useState(false);
     const [feedback,setFeedback] = useState("")
     const form = useForm()
@@ -12,7 +33,7 @@ function Report() {
     const [text,setText] = useState(false);
 var endpoint = "https://script.google.com/macros/s/AKfycbwAHJ8IcTdxdiTDWuwDN8KhxpVfdyYSEFPTMjH_AIWJSzYZOxMvaBJZHBbwDWRuZxm6/exec"
  const SubmitReport = (data)=>{
-    var report = {
+        var report = {
         data:data,
         sabha_name:sabha,
         total_balako:bname.length,
@@ -26,12 +47,28 @@ var endpoint = "https://script.google.com/macros/s/AKfycbwAHJ8IcTdxdiTDWuwDN8Khx
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.isConfirmed) {
-            setText(true)
-            try{
+            if(watch("present_balako")==false){
+                toast.error('Select the present balako!', {
+                    position: "top-center",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    })
+            }else{
+                setText(true)
                 fetch(endpoint, {
                     method: "POST",
                     body: JSON.stringify(report),
-                   }).then(res=>res.json()).then((data)=>{
+                   }).then(res=>{
+                    if(res.status==200){
+                       return res.json()
+                    }
+                    throw new Error('Something went wrong');
+                    }).then((data)=>{
                        if(data.status){
                         console.log(data.data)
                         setFeedback(data.data)
@@ -39,13 +76,25 @@ var endpoint = "https://script.google.com/macros/s/AKfycbwAHJ8IcTdxdiTDWuwDN8Khx
                            reset()
                            setOpen(true)
                        }
+                   }).catch((error)=>{
+                    if(error){
+                        setText(false)
+                        toast.error('Something went wrong, try again!', {
+                            position: "top-center",
+                            autoClose: 2000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: false,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "dark",
+                            })
+                    }
                    })
             }
-            catch(err){
-                if(err){
-                    console.log("there is an error please try again")
-                }
-            }
+                
+            
+            
         }})
  }
   var {sabha} = useParams()
@@ -55,11 +104,27 @@ var endpoint = "https://script.google.com/macros/s/AKfycbwAHJ8IcTdxdiTDWuwDN8Khx
     fetch(`https://script.google.com/macros/s/AKfycbz7XOlBHFQ_h85UuZMGaaAnXxBtbKMHhju1YP_ZlksR1R_FBzRCq4XHfEPSIQkYM0Su/exec?type=nodel&sabha=${sabha}&action=name`,{redirect: "follow", headers: {
       "Content-Type": "text/plain;charset=utf-8",
     },mode: "cors",})
-    .then((response) => response.json())
-    .then((data) => (setBname(data.data)));
+    .then((response) => {
+        if(response.status==200){
+            return response.json()
+        }
+        throw new Error("Some thing went wrong")
+    })
+    .then((data) => (setBname(data.data))).catch((error)=>{
+        toast.error('Something went wrong, please refresh!', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            })
+    });
   },[])
   function changeDate(edit_date){
-    var date = edit_date.spilt("-")
+    var date = edit_date.split("-")
     var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
     var month = months[+(date[1])-1]
     return date[2]+" "+month + " "+date[0]
@@ -68,7 +133,8 @@ var endpoint = "https://script.google.com/macros/s/AKfycbwAHJ8IcTdxdiTDWuwDN8Khx
   return (
 
     <div className='w-full h-full'>
-        
+            <ToastContainer />
+
             <Modal open={open} closeOnOverlayClick={false} focusTrapped={true} onClose={()=>{setOpen(false)}} showCloseIcon={false}>
             <div className='heading w-full h-[40px]  bg-white flex items-center justify-between'>
             <h3 className='ml-4 text-lg'>Report</h3>
@@ -77,7 +143,7 @@ var endpoint = "https://script.google.com/macros/s/AKfycbwAHJ8IcTdxdiTDWuwDN8Khx
                 {
                     feedback!==""?<div id='content' className='w-full h-full text-gray-800'>
                     <p>{feedback.sabha_name}</p>
-                    <p>Sabha Date : {feedback.data.date}</p>
+                    <p>{changeDate(feedback.data.date)}</p>
                     <p>{(feedback.data.sabha_no).toUpperCase()}</p>
                     <p>Total balako : {feedback.total_balako}</p>
                     <p>Total present balako : {feedback.present_balako}</p>
@@ -86,20 +152,20 @@ var endpoint = "https://script.google.com/macros/s/AKfycbwAHJ8IcTdxdiTDWuwDN8Khx
                     <p> Sarvang vihar : {feedback.data.sarvang_vihar==true?"✔️":"❌"}</p>
                     <p> Pragat vihar : {feedback.data.pragat_vihar==true?"✔️":"❌"}</p>
                     <p>{feedback.data.other?feedback.data.other_sabha:""}</p>
-                    <p>Ehwal % : {feedback.data.ehwal_per}</p>
-                    <p>Mulakat</p>
+                    <p>Ehwal % : {feedback.data.ehwal_per}%</p>
+                    <p>Mulakat
+                    <span hidden={feedback.data.santo==true||feedback.data.santo==true||feedback.data.nirikshak==true||feedback.data.agresar==true}> : None</span>
+                    </p>
                     <p>{feedback.data.santo==true?"Santo ✔️":""}</p>
                     <p>{feedback.data.nirdeshak==true?"Nirdeshak ✔️":""}</p>
                     <p>{feedback.data.nirikshak==true?"Nirikshak ✔️":""}</p>
                     <p>{feedback.data.agresar==true?"Agresar ✔️":""}</p>
-                    <p>Prasad : {feedback.data.prasad}</p>
+                    <p>{feedback.data.prasad===""?"":`Prasad : ${feedback.data.prasad}`}</p>
                  </div>:<h1>Loading..</h1>
                 }
                 <div className='mt-2 '>
-                    <button className='copy-btn py-1 ml-2 px-3 bg-gray-800 text-white'>Copy</button>
-                    <button onClick={()=>setOpen(false)} className='py-1 ml-2 px-3 bg-gray-800 text-white'>Close</button>
-                    <button className='py-1 ml-2 px-3 bg-gray-800 text-white'>Share</button>
-
+                    <button onCopy={()=>{setCopy(true)}} className='copy-btn py-1 ml-2 px-3 bg-gray-800 text-white'  data-clipboard-target="#content" data-clipboard-action="copy" data-clipboard-text={copyvalue} >Copy</button>
+                    <button type='button' onClick={()=>setOpen(false)} className='py-1 ml-2 px-3 bg-gray-800 text-white'>Close</button>
                 </div>
             </Modal>
         
@@ -236,7 +302,7 @@ var endpoint = "https://script.google.com/macros/s/AKfycbwAHJ8IcTdxdiTDWuwDN8Khx
                                             
                                         </div>
                             <div hidden={watch("other")===false} class="col-span-6 sm:col-span-3">
-                                <label for="ehwal_per" class="block text-sm font-medium text-gray-700">Other Karyaram</label>
+                                <label for="other_sabha" class="block text-sm font-medium text-gray-700">Other Karyaram</label>
                                 <input type="text" {...register("other_sabha")} placeholder="Visesh sabha" id="first-name"
                                     autocomplete="given-name"
                                     class="mt-1 block w-full outline-none p-2 border-b-2"/>

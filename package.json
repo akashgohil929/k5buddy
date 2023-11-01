@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "clipboard": "^2.0.11",
+    "firebase": "^10.5.2",
     "gapi-script": "^1.2.0",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",

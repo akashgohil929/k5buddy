@@ -8,13 +8,11 @@ import { AppProvider } from './storage/data_fetch';
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <React.StrictMode>
     <GoogleOAuthProvider clientId="369497167960-kacuvdv01t5bo3faru78m6nqc5kjkm1m.apps.googleusercontent.com">
         <AppProvider>
             <App/>
         </AppProvider>
     </GoogleOAuthProvider>
-  </React.StrictMode>
 )
 
 reportWebVitals();
