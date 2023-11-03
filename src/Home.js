@@ -19,8 +19,8 @@ function Home(){
             name:name,
             token:token
           }
-          var endpoint = "https://script.google.com/macros/s/AKfycbzxUx4cGh7K_oA0SzPAPtqip41-r-6l6WpxQd5MHqsj-ZttbMLxoZUtOqWeaYeQlcD-/exec"
-          fetch(endpoint, {
+          var endpoints = "https://script.google.com/macros/s/AKfycbzxUx4cGh7K_oA0SzPAPtqip41-r-6l6WpxQd5MHqsj-ZttbMLxoZUtOqWeaYeQlcD-/exec"
+          fetch(endpoints, {
             method: "POST",
             body: JSON.stringify(noti),
            }).then(res=>{
