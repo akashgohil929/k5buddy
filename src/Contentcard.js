@@ -7,12 +7,12 @@ function Contentcard(props) {
 
   var {content_id,content_name,content_title,content_gid} = props.content
   return (
-    <div key={content_id} className='w-[90%] min-h-[70px] bg-white flex items-center justify-center m-2'>
-      <div className='left h-full w-[80%] flex justify-center flex-col pl-5'>
+    <div key={content_id} className='w-[90%] rounded-xl	 min-h-[70px] bg-white flex items-center justify-center m-2'>
+      <div className='left rounded-l-xl h-full w-[80%] flex justify-center flex-col pl-5'>
         <h1 className='font-semibold text-lg'>{content_title}</h1>
         <p className='text-sm'>{content_name}</p>
       </div>
-      <div className='right h-full w-[20%] bg-gray-600  flex items-center justify-evenly flex-col'>
+      <div className='right rounded-r-xl h-full w-[20%] bg-gray-600  flex items-center justify-evenly flex-col'>
       <a href={`https://drive.google.com/uc?export=download&id=${content_gid}`}><i className="fa-solid fa-file-arrow-down text-xl text-white"></i></a>
       <i onClick={()=>setOpen(true)} className="fa-solid fa-eye text-xl text-white"></i>
       </div>

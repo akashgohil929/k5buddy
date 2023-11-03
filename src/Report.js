@@ -169,14 +169,14 @@ var endpoint = "https://script.google.com/macros/s/AKfycbwAHJ8IcTdxdiTDWuwDN8Khx
                 </div>
             </Modal>
         
-      <div class="mt-0 w-full h-full md:col-span-2">
+      <div className="mt-0 w-full h-full bg-[#151E3D] md:col-span-2">
             <form onSubmit={handleSubmit(SubmitReport)} >
-                <div class="shadow overflow-hidden ">
-                    <div class="px-2 py-8 bg-white sm:p-6">
+                <div className="shadow overflow-hidden ">
+                    <div className="px-2 py-8 bg-white sm:p-6">
 
-                        <div class="grid grid-cols-6 gap-6">
-                        <div class="col-span-6 sm:col-span-3">
-                                <label for="ehwal_per" class="block text-sm font-medium text-gray-700">Ehwal Percentage(if ehwal is not opened put 0)</label>
+                        <div className="grid grid-cols-6 gap-6">
+                        <div className="col-span-6 sm:col-span-3">
+                                <label htmlFor="ehwal_per" className="block text-sm font-medium text-gray-700">Ehwal Percentage(if ehwal is not opened put 0)</label>
                                 <input 
                                 type="number" 
                                 {...register("ehwal_per",{valueAsNumber:false,required:{value:true,message:"Enter the ehwal percentage after filling the ehwal"}})} 
@@ -184,21 +184,21 @@ var endpoint = "https://script.google.com/macros/s/AKfycbwAHJ8IcTdxdiTDWuwDN8Khx
                                 id="first-name"
                                 min={0}
                                 max={100}
-                                class="mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none block w-full outline-none border-b-2 p-2"/>
+                                className="mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none block w-full outline-none border-b-2 p-2"/>
                             </div>
                             <div hidden={watch("ehwal_per")!==""}  className='col-span-6 sm:col-span-6'>
                                 <a href='https://balmandal.in.baps.org/' target="_blank" className='text-indigo-900 underline'>Click here to fill ehwal</a>
                             </div>
-                            <div hidden={watch("ehwal_per")===""}  class="col-span-6 sm:col-span-3">
-                                <label for="sabha_date" class="block text-sm font-medium text-gray-700">Sabha Date</label>
+                            <div hidden={watch("ehwal_per")===""}  className="col-span-6 sm:col-span-3">
+                                <label htmlFor="sabha_date" className="block text-sm font-medium text-gray-700">Sabha Date</label>
                                 <input {...register("date",{valueAsDate:false,required:{value:true,message:"Enter the sabha date"}})} type="date"  placeholder="09/02/2021" id="sabha_date"
-                                    class="mt-1  text-gray-800  outline-none block w-full shadow-sm" />
+                                    className="mt-1  text-gray-800  outline-none block w-full shadow-sm" />
                             </div>
-                            <div hidden={watch("ehwal_per")===""}  class="col-span-6 sm:col-span-3">
-                                <label for="country" class="block text-sm font-medium text-gray-700">
+                            <div hidden={watch("ehwal_per")===""}  className="col-span-6 sm:col-span-3">
+                                <label htmlFor="country" className="block text-sm font-medium text-gray-700">
                                     Sabha No.</label>
                                 <select required {...register("sabha_no",{required:{value:true,message:"select the sabha no. as per bsc"}})} id="sabha_no" 
-                                    class="mt-1 block w-full py-2 px-3  bg-white rounded-md shadow-sm outline-none ">
+                                    className="mt-1 block w-full py-2 px-3  bg-white rounded-md shadow-sm outline-none ">
                                     <option value=""> --Select the option-- </option>
                                     <option value="bsc 1">BCS 1</option>
                                     <option value="bsc 2">BSC 2</option>
@@ -212,9 +212,9 @@ var endpoint = "https://script.google.com/macros/s/AKfycbwAHJ8IcTdxdiTDWuwDN8Khx
 
 
                         </div>
-                        <div hidden={watch("ehwal_per")===""} class="mt-8 ">
-                            <div class="mt-2 space-y-4">
-                                <legend class=" text-base  text-1.5xl font-medium text-gray-900">
+                        <div hidden={watch("ehwal_per")===""} className="mt-8 ">
+                            <div className="mt-2 space-y-4">
+                                <legend className=" text-base  text-1.5xl font-medium text-gray-900">
                                     Select the present balko
                                 </legend>
                                 {
@@ -223,15 +223,15 @@ var endpoint = "https://script.google.com/macros/s/AKfycbwAHJ8IcTdxdiTDWuwDN8Khx
                                     </div>:<div>
                                         {
                                         bname.map((ele,i)=>{
-                                            return <div  key={i} class="mt-2 space-y-4">
-                                            <div class="flex items-start">
-                                                <div class="flex items-center h-5">
+                                            return <div  key={i} className="mt-2 space-y-4">
+                                            <div className="flex items-start">
+                                                <div className="flex items-center h-5">
                                                     <input {...register("present_balako")} name="present_balako" type="checkbox" value={ele.name}
-                                                        class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
+                                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
                                                 </div>
-                                                <div class="ml-3 text-sm">
-                                                    <label for="comments"
-                                                        class="font-mediuregular text-gray-700">{ele.name}</label>
+                                                <div className="ml-3 text-sm">
+                                                    <label htmlFor="comments"
+                                                        className="font-mediuregular text-gray-700">{ele.name}</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -239,139 +239,139 @@ var endpoint = "https://script.google.com/macros/s/AKfycbwAHJ8IcTdxdiTDWuwDN8Khx
                                     }
                                     </div>
                                 }
-                                <div class="col-span-6 sm:col-span-3">
-                                <label for="new_balak_count" class="block text-sm font-medium text-gray-700">New balako count</label>
+                                <div className="col-span-6 sm:col-span-3">
+                                <label htmlFor="new_balak_count" className="block text-sm font-medium text-gray-700">New balako count</label>
                                 <input 
                                 type="number" 
                                 {...register("new_balak_count",{valueAsNumber:false,required:{value:false,message:"Enter the ehwal percentage after filling the ehwal"}})} 
                                 placeholder="0 if not" 
                                 id="first-name"
                                 defaultValue={0}
-                                class="mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none block w-full outline-none border-b-2 p-2"/>
+                                className="mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none block w-full outline-none border-b-2 p-2"/>
                             </div>
-                                <legend class=" text-base  text-1.5xl font-medium text-gray-900">
+                                <legend className=" text-base  text-1.5xl font-medium text-gray-900">
                                     Select the sabha karyakram
                                 </legend>
-                                <div class="mt-2 space-y-4">
-                                            <div class="flex items-start">
-                                                <div class="flex items-center h-5">
+                                <div className="mt-2 space-y-4">
+                                            <div className="flex items-start">
+                                                <div className="flex items-center h-5">
                                                     <input {...register("satsang_vihar")} name="satsang_vihar" type="checkbox"
-                                                        class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
+                                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
                                                 </div>
-                                                <div class="ml-3 text-sm">
-                                                    <label for="comments"
-                                                        class="font-mediuregular text-gray-700">Satsang Vihar</label>
+                                                <div className="ml-3 text-sm">
+                                                    <label htmlFor="comments"
+                                                        className="font-mediuregular text-gray-700">Satsang Vihar</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div  class="mt-2 space-y-4">
-                                            <div class="flex items-start">
-                                                <div class="flex items-center h-5">
+                                        <div  className="mt-2 space-y-4">
+                                            <div className="flex items-start">
+                                                <div className="flex items-center h-5">
                                                     <input {...register("sarvang_vihar")} name="sarvang_vihar" type="checkbox"
-                                                        class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
+                                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
                                                 </div>
-                                                <div class="ml-3 text-sm">
-                                                    <label for="comments"
-                                                        class="font-mediuregular text-gray-700">Sarvang Vihar</label>
+                                                <div className="ml-3 text-sm">
+                                                    <label htmlFor="comments"
+                                                        className="font-mediuregular text-gray-700">Sarvang Vihar</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div  class="mt-2 space-y-4">
-                                            <div class="flex items-start">
-                                                <div class="flex items-center h-5">
+                                        <div  className="mt-2 space-y-4">
+                                            <div className="flex items-start">
+                                                <div className="flex items-center h-5">
                                                     <input {...register("pragat_vihar")} name="pragat_vihar" type="checkbox"
-                                                        class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
+                                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
                                                 </div>
-                                                <div class="ml-3 text-sm">
-                                                    <label for="comments"
-                                                        class="font-mediuregular text-gray-700">Pragat Vihar</label>
+                                                <div className="ml-3 text-sm">
+                                                    <label htmlFor="comments"
+                                                        className="font-mediuregular text-gray-700">Pragat Vihar</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div  class="mt-2 space-y-4">
-                                            <div class="flex items-start">
-                                                <div class="flex items-center h-5">
+                                        <div  className="mt-2 space-y-4">
+                                            <div className="flex items-start">
+                                                <div className="flex items-center h-5">
                                                     <input {...register("other")} name="other" type="checkbox"
-                                                        class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
+                                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
                                                 </div>
-                                                <div class="ml-3 text-sm">
-                                                    <label for="comments"
-                                                        class="font-mediuregular text-gray-700">Others</label>
+                                                <div className="ml-3 text-sm">
+                                                    <label htmlFor="comments"
+                                                        className="font-mediuregular text-gray-700">Others</label>
                                                 </div>
                                             </div>
                                             
                                         </div>
-                            <div hidden={watch("other")===false} class="col-span-6 sm:col-span-3">
-                                <label for="other_sabha" class="block text-sm font-medium text-gray-700">Other Karyaram</label>
+                            <div hidden={watch("other")===false} className="col-span-6 sm:col-span-3">
+                                <label htmlFor="other_sabha" className="block text-sm font-medium text-gray-700">Other Karyaram</label>
                                 <input type="text" {...register("other_sabha")} placeholder="Visesh sabha" id="first-name"
-                                    autocomplete="given-name"
-                                    class="mt-1 block w-full outline-none p-2 border-b-2"/>
+                                    autoComplete="given-name"
+                                    className="mt-1 block w-full outline-none p-2 border-b-2"/>
                             </div>
-                            <legend class=" text-base  text-1.5xl font-medium text-gray-900">
+                            <legend className=" text-base  text-1.5xl font-medium text-gray-900">
                                     Mulakat
                                 </legend>
-                                <div class="mt-2 space-y-4">
-                                            <div class="flex items-start">
-                                                <div class="flex items-center h-5">
+                                <div className="mt-2 space-y-4">
+                                            <div className="flex items-start">
+                                                <div className="flex items-center h-5">
                                                     <input {...register("santo")} type="checkbox"
-                                                        class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
+                                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
                                                 </div>
-                                                <div class="ml-3 text-sm">
-                                                    <label for="comments"
-                                                        class="font-mediuregular text-gray-700">Santo</label>
+                                                <div className="ml-3 text-sm">
+                                                    <label htmlFor="comments"
+                                                        className="font-mediuregular text-gray-700">Santo</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="mt-2 space-y-4">
-                                            <div class="flex items-start">
-                                                <div class="flex items-center h-5">
+                                        <div className="mt-2 space-y-4">
+                                            <div className="flex items-start">
+                                                <div className="flex items-center h-5">
                                                     <input {...register("nirdeshak")} type="checkbox"
-                                                        class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
+                                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
                                                 </div>
-                                                <div class="ml-3 text-sm">
-                                                    <label for="comments"
-                                                        class="font-mediuregular text-gray-700">Nirdeshak</label>
+                                                <div className="ml-3 text-sm">
+                                                    <label htmlFor="comments"
+                                                        className="font-mediuregular text-gray-700">Nirdeshak</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="mt-2 space-y-4">
-                                            <div class="flex items-start">
-                                                <div class="flex items-center h-5">
+                                        <div className="mt-2 space-y-4">
+                                            <div className="flex items-start">
+                                                <div className="flex items-center h-5">
                                                     <input {...register("agresar")} type="checkbox"
-                                                        class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
+                                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
                                                 </div>
-                                                <div class="ml-3 text-sm">
-                                                    <label for="comments"
-                                                        class="font-mediuregular text-gray-700">Agresar</label>
+                                                <div className="ml-3 text-sm">
+                                                    <label htmlFor="comments"
+                                                        className="font-mediuregular text-gray-700">Agresar</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="mt-2 space-y-4">
-                                            <div class="flex items-start">
-                                                <div class="flex items-center h-5">
+                                        <div className="mt-2 space-y-4">
+                                            <div className="flex items-start">
+                                                <div className="flex items-center h-5">
                                                     <input {...register("nirikshak")} type="checkbox"
-                                                        class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
+                                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
                                                 </div>
-                                                <div class="ml-3 text-sm">
-                                                    <label for="comments"
-                                                        class="font-mediuregular text-gray-700">Nirikshak</label>
+                                                <div className="ml-3 text-sm">
+                                                    <label htmlFor="comments"
+                                                        className="font-mediuregular text-gray-700">Nirikshak</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div  class="col-span-6 sm:col-span-3">
-                                <label for="ehwal_per" class="block text-sm font-medium text-gray-700">Prasad</label>
+                                        <div  className="col-span-6 sm:col-span-3">
+                                <label htmlFor="ehwal_per" className="block text-sm font-medium text-gray-700">Prasad</label>
                                 <input type="text" {...register("prasad")} placeholder="Ice cream" id="first-name"
-                                    autocomplete="given-name"
-                                    class="mt-1 block w-full outline-none p-2 border-b-2"/>
+                                    autoComplete="given-name"
+                                    className="mt-1 block w-full outline-none p-2 border-b-2"/>
                             </div>
                             </div>
 
 
                     </div>
-                    <div class="px-4 py-3 bg-white text-right sm:px-6">
+                    <div className="px-4 py-3 bg-white text-right sm:px-6">
                         
                         <button  type="submit" disabled={watch("ehwal_per")===""}
-                            class={`inline-flex justify-center w-24 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md ${watch("ehwal_per")!==""?`bg-indigo-600 opacity-100`:`bg-indigo-500  opacity-50`}  text-white`}>
+                            className={`inline-flex justify-center w-24 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md ${watch("ehwal_per")!==""?`bg-[#151B54] opacity-100`:`bg-[#151B54]  opacity-50`}  text-white`}>
                             {text?"Generating report..":"Submit"}
                         </button>
 

@@ -4,7 +4,7 @@ import Load from './Load'
 function Addbalko() {
   const [load,setLoad] = useState(false)
   return (
-    <div className="w-full h-full overflow-x-auto">
+    <div className="w-full h-full bg-[#151E3D] overflow-x-auto">
       {
         load?<div></div>:<Load caption={"Loading the form.."}/>
       }

@@ -1,27 +1,16 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,lazy,Suspense} from 'react'
+import { BrowserRouter as Router ,Route,Routes } from 'react-router-dom';
 import Login from './Login';
 import Home from './Home';
-import { BrowserRouter as Router ,Route,Routes } from 'react-router-dom';
-import Balkodb from './Balkodb';
-import Addbalko from './Addbalko';
-import Sabha from './Sabha'
 import NotFound from './NotFound'
 import Protected from './Protected';
-import Report from './Report';
-import Content from './Content';
+import Load from './Load';
+const Balkodb = lazy(()=>import('./Balkodb'))
+const Addbalko = lazy(()=>import('./Addbalko'))
+const Sabha = lazy(()=>import('./Sabha'))
+const Report  = lazy(()=>import('./Report'))
+const Content = lazy(()=>import('./Content'))
 function App() { 
-  // const [login,setLogin]= useState(null)
-  // useEffect(()=>{
-  //   fetch('https://script.google.com/macros/s/AKfycbw7zJ3c7xXUdj7mbDaXYl2MudX9vFNuE3kxGT1EZ2OQJhEWQ0iV_-_MT1713bkuYD0h/exec',{redirect: "follow", headers: {
-  //     "Content-Type": "text/plain;charset=utf-8",
-  //   },mode: "cors",})
-  //   .then((response) => response.json())
-  //   .then((data) => setLogin(data));
-  // },[])
-  // var user_index=null;
-  // const getData = (data)=>{
-  //   user_index = data
-  // }
   useEffect(()=>{
     var status = localStorage.getItem("is_login")
     if(status=="true"){
@@ -34,6 +23,7 @@ function App() {
   return (
     <div className="main w-full h-[100vh] bg-blue-700">
     <Router>
+      <Suspense fallback={<Load caption={"Loading..."}/>}>
       <Routes>
       <Route exact path='/' element={<Login/>}/>
       <Route exact path='/home/:id/:name/:post/:sabha/:sabha_no' element={<Protected Component={Home}/>}>
@@ -46,9 +36,8 @@ function App() {
       </Route>
       <Route path='/*' element={<Protected Component={NotFound}/>}/>
       </Routes>
+      </Suspense>
     </Router>
-
-      
     </div>
   )
 }

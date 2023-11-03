@@ -26,8 +26,24 @@ function Login(){
       fetch('https://script.google.com/macros/s/AKfycbw7zJ3c7xXUdj7mbDaXYl2MudX9vFNuE3kxGT1EZ2OQJhEWQ0iV_-_MT1713bkuYD0h/exec',{redirect: "follow", headers: {
       "Content-Type": "text/plain;charset=utf-8",
     },mode: "cors",})
-    .then((response) => response.json())
-    .then((data) => setLogin(data));
+    .then((response) => {
+      if(response.status===200){
+        return response.json()
+      }
+      throw new Error('fetching error')
+    })
+    .then((data) => setLogin(data)).catch((err)=>{
+      toast.error('Something went wrong, please refresh!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        })
+    });
     }
     
   },[])

@@ -111,7 +111,7 @@ function Card(props) {
             <i onClick={()=>setOpen(false)} className="fa-solid fa-rectangle-xmark text-2xl mr-4"></i>
             </div>
             <div className='form'>
-<section className="w-full p-6 mx-0  bg-gray-800 rounded-md shadow-md dark:bg-gray-800 mt-0">
+<section className="w-full p-6 mx-0  bg-[#151e3d] rounded-md shadow-md  mt-0">
     <form onSubmit={save}>
         <div className="grid grid-cols-1 gap-6 mt-0 sm:grid-cols-2">
             <div>

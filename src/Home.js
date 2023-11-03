@@ -19,7 +19,6 @@ function Home(){
             name:name,
             token:token
           }
-          console.log(noti)
           var endpoint = "https://script.google.com/macros/s/AKfycbzxUx4cGh7K_oA0SzPAPtqip41-r-6l6WpxQd5MHqsj-ZttbMLxoZUtOqWeaYeQlcD-/exec"
           fetch(endpoint, {
             method: "POST",
@@ -30,7 +29,7 @@ function Home(){
             }
             throw new Error('Something went wrong');
             }).then((data)=>{
-              console.log(data)
+              localStorage.setItem('token',data.token)
           }).catch((error)=>{
            if(error){
                toast.error('Something went wrong, try again!', {
