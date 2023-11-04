@@ -19,7 +19,7 @@ function Home(){
             name:name,
             token:token
           }
-          var endpoints = "https://script.google.com/macros/s/AKfycbzxUx4cGh7K_oA0SzPAPtqip41-r-6l6WpxQd5MHqsj-ZttbMLxoZUtOqWeaYeQlcD-/exec"
+          var endpoints = "https://script.google.com/macros/s/AKfycbwt7PwMddYopdeUdjrtfYfQmyy4hA5GIvBI4r5OLb0KyAi40iLbJoEhNBt4_A2hjfz9/exec"
           fetch(endpoints, {
             method: "POST",
             body: JSON.stringify(noti),
